@@ -4,7 +4,7 @@
 
 #### 1 Java代码示例
 
-\- JavaKafkaWordCount.java
+- JavaKafkaWordCount.java
 
 ``` java
 package org.apache.spark.examples.streaming;
@@ -82,7 +82,7 @@ public final class JavaKafkaWordCount {
 }
 ```
 
-\- 下载依赖包
+- 下载依赖包
 
 [com.google.common\_1.0.0.201004262004.jar](http://uhadoop-new.ufile.ucloud.com.cn/kafka/com.google.common_1.0.0.201004262004.jar)
 
@@ -90,7 +90,7 @@ public final class JavaKafkaWordCount {
 
 [spark-assembly-1.5.2-hadoop2.6.0.jar](http://uhadoop-new.ufile.ucloud.com.cn/spark/spark-assembly-1.5.2-hadoop2.6.0.jar)
 
-\- 创建工程
+- 创建工程
 
 在eclipse中创建一个新的工程，并将上面的代码添加到工程中。然后，导入上面的3个jar包：
 
@@ -106,7 +106,7 @@ public final class JavaKafkaWordCount {
 ![spark-04.bmp](/images/spark-04.png)
 ![spark-05.bmp](/images/spark-05.png)
 
-\- 启动命令
+- 启动命令
 
 将上一步导出的jar包拷贝到spark集群，并执行以下命令：
 
@@ -128,7 +128,7 @@ spark-submit --master yarn --jars spark-streaming-kafka-assembly_2.10-1.5.2.jar 
 
 #### 2 Scala代码示例
 
-\- KafkaWordCountProducer.scala
+- KafkaWordCountProducer.scala
 
 ``` java
 package org.apache.spark.examples.streaming
@@ -195,7 +195,7 @@ object KafkaWordCountProducer {
 }
 ```
 
-\- 发送消息
+- 发送消息
 
 ```
 spark-submit --master yarn --deploy-mode client --class org.apache.spark.example.streaming.KafkaWordCountProducer /home/hadoop/spark/lib/spark-examples-1.5.2-hadoop2.6.0-cdh5.4.4.jar ip:9092 test_tpoic 1 2
@@ -207,7 +207,7 @@ ip:9092表示producer的ip地址和端口；test\_topic表示topic；1表示每�
 
 在test\_topic的消息接收端，可以看到有持续的记录输出。
 
-\- 消费消息
+- 消费消息
 
 ```
 spark-submit --master yarn --deploy-mode client --class org.apache.spark.examples.streaming.KafkaWordCount /home/hadoop/spark/lib/spark-examples-1.5.2-hadoop2.6.0-cdh5.4.4.jar ip:2181 test-consumer-group test_topic 1
@@ -231,7 +231,7 @@ ip:2181表示zookeeper的监听地址；test-consumer-group表示当前消费的
 
 #### 3 Python代码示例
 
-\- wordcount.py
+- wordcount.py
 
 ``` python
 #/usr/bin/python
@@ -263,7 +263,7 @@ if __name__ == "__main__":
     ssc.awaitTermination()
 ```
 
-\- 执行代码
+- 执行代码
 
 ```
 spark-submit --packages org.apache.spark:spark-streaming-kafka_2.10:1.5.2 --master yarn --deploy-mode client wordcount.py ip:2181 test_topic wc

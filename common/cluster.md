@@ -35,13 +35,9 @@
 | zookeeper.sync.time.ms          | int    | 1-2147483646   | zk信息同步间隔       |
 
 > 注解：
-
-\>
-
+>
 > replica.fetch.max.bytes须大于等于message.max.bytes；
-
-\>
-
+>
 > num.io.threads与num.network.threads可控制节点负载与集群性能均衡。
 
 ### 调整集群参数
