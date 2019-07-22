@@ -2,7 +2,7 @@
 
 ## 使用Flume+UKafka
 
-### 1\. Flume简介
+### 1. Flume简介
 
 Flume是一个高可用的，高可靠的，分布式的海量日志采集、聚合和传输的系统，Flume支持在日志系统中定制各类数据发送方，用于收集数据；同时，Flume提供对数据进行简单处理，并写到各种数据接受方（可定制）的能力。
 
@@ -33,7 +33,7 @@ Source接收到数据的一个缓冲。数据在被消费前(写入到Sink)，�
 
 从Challe的缓冲中取出数据，存储到最终流向的地方。
 
-#### 2\. 下载安装
+#### 2. 下载安装
 
 以flume-1.6.0版本为例：
 
@@ -52,7 +52,7 @@ tar xf apache-flume-1.6.0-bin.tar.gz
 export JAVA_OPTS="-Xms100m -Xmx1024m -Dcom.sun.management.jmxremote"
 ```
 
-#### 3\. 抓取本地日志到UKafka
+#### 3. 抓取本地日志到UKafka
 
 \- 修改配置文件
 

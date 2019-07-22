@@ -2,13 +2,13 @@
 
 ## kafka rest proxy 安装
 
-### 1\. kafka rest proxy用途
+### 1. kafka rest proxy用途
 
 \- 通过http接口访问kafka
 
 \- 可以在有外网的Uhost安装，kafka rest proxy外网访问内网Ukafka
 
-### 2\. 安装条件
+### 2. 安装条件
 
 \- 基于Centos6
 
@@ -18,7 +18,7 @@
 
 \- 有外网 备注：可以根据kafka选择对应的confluent 版本
 
-### 3\. 安装步骤
+### 3. 安装步骤
 
 \- 安装jdk1.8 以上，并配置环境变量
 
@@ -91,7 +91,7 @@ kafka-rest-start /etc/kafka-rest/kafka-rest.properties
 
 ```
 
-### 4\. kafka rest proxy 测试
+### 4. kafka rest proxy 测试
 
 备注：下面localhost请修改为kafka-rest地址 - list所有topics
 
@@ -111,7 +111,7 @@ curl "http://localhost:8082/topics/test"
 curl -X POST -H "Content-Type: application/vnd.kafka.json.v1+json" -H "Accept: application/vnd.kafka.v1+json" --data '{"records":[{"value":{"foo":"bar"}}]}' "http://localhost:8082/topics/test"
 ```
 
-### 5\. 参考资料
+### 5. 参考资料
 
 \- 更多操作请查看confluent官网：
 

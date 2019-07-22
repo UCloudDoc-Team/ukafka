@@ -2,13 +2,13 @@
 
 ### Storm消费kafka消息
 
-\- 安装Strom依赖库
+- 安装Strom依赖库
 
 下载并解压[Storm发行版本](http://uhadoop-new.ufile.ucloud.com.cn/storm/apache-storm-0.9.2-incubating.tar.gz)
 
 这个版本带有kafka相关操作的完整依赖包。
 
-\- 修改storm.yaml配置文件
+- 修改storm.yaml配置文件
 
 Storm发行版本的解压目录下有一个conf/storm.yaml文件，用于配置Storm。默认配置可以在[github](https://github.com/nathanmarz/storm/blob/master/conf/defaults.yaml)查看。conf/storm.yaml中的配置选项将覆盖defaults.yaml中的默认配置。以下配置选项是必须在conf/storm.yaml中进行配置的：
 
@@ -18,9 +18,9 @@ Storm集群使用的Zookeeper集群地址，其格式如下：
 
 storm.zookeeper.servers:
 
-\\- "111.222.333.444"
+"111.222.333.444"
 
-\\- "555.666.777.888"
+"555.666.777.888"
 
 如果Zookeeper集群使用的不是默认端口，那么还需要配置storm.zookeeper.port
 
@@ -42,15 +42,15 @@ nimbus.host: "111.222.333.444"
 
 supervisor.slots.ports:
 
-\\- 6700
+6700
 
-\\- 6701
+6701
 
-\\- 6702
+6702
 
-\\- 6703
+6703
 
-\- 启动Storm各个后台进程
+- 启动Storm各个后台进程
 
 最后一步，启动Storm的所有后台进程。和Zookeeper一样，Storm也是快速失败(fail-fast)的系统。这样Storm才能在任意时刻被停止，并且当进程重启后被正确地恢复执行。这也是为什么Storm不在进程没保存状态的原因。即使Nimbus或Supervisors被重启，运行中的Topologies不会受到影响。
 
@@ -84,13 +84,9 @@ bin/storm ui > /dev/null 2>&1 &"
 host}:8080观察集群的worker资源使用情况、Topologies的运行状态等信息。
 
 > 注解：
-
-\>
-
+>
 > 1.Storm后台进程被启动后，将在Storm、安装部署目录下的logs/子目录生成各个进程的日志文件；
-
-\>
-
+>
 > 2.Storm UI必须和Storm Nimbus部署在同一台机器上。否则，Storm UI无法正常工作。
 
 至此，Storm集群已经部署、配置完毕。
@@ -99,7 +95,7 @@ Storm UI展示界面：
 
 ![storm-01.bmp](/images/storm-01.png)
 
-\- Java代码
+- Java代码
 
 **1.topology.java**
 
@@ -283,7 +279,7 @@ public class QueryBolt implements IRichBolt {
 }
 ```
 
-\- 编译
+- 编译
 
 从上面下载的storm包中找到下面3个包，导入到工程中：
 
@@ -291,13 +287,13 @@ public class QueryBolt implements IRichBolt {
 
 编译后导出jar包。
 
-\- 拷贝集群运行依赖包到默认路径
+- 拷贝集群运行依赖包到默认路径
 
 ```
 cp /usr/local/kafka/libs/* /storm-kafka/storm-kafka-0.9.2-incubating.jar apache-storm-0.9.2-incubating/lib/
 ```
 
-\- 启动Storm Topology
+- 启动Storm Topology
 
 ```
 bin/storm jar /data/sjwc.jar topology
@@ -320,7 +316,7 @@ jjjlk;a lkkj ivl
 
 94是单词个数，下面是topic中所有内容。
 
-\- 停止Storm Topology
+- 停止Storm Topology
 
 ```
 storm kill {topname}

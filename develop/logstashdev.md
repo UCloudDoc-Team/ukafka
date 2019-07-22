@@ -6,7 +6,7 @@ Logstash可以很容易的将服务器日志收集并推送到UKafka。Logstash�
 logstash-output-kafka”和”bin/plugin install
 logstash-input-kafka”安装连接UKafka所需插件。
 
-### 1\. logstash-output-kafka
+### 1. logstash-output-kafka
 
 配置logstash-output-kafka.conf文件
 
@@ -23,9 +23,9 @@ output {
 }
 ```
 
-执行”./bin/logstash agent -f logstash-output-kafka.conf”往UKafka发送消息
+执行"./bin/logstash agent -f logstash-output-kafka.conf"往UKafka发送消息
 
-\==== 2. logstash-input-kafka ====
+==== 2. logstash-input-kafka ====
 
 配置logstash-input-kafka.conf文件
 
