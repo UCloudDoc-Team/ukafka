@@ -67,6 +67,40 @@ UKafka集群的创建请参考文档：https://doc.ucloud.cn/analysis/ukafka/com
 
 为了更好的支持业务，我们允许您通过编写自定义Java代码解析自定义数据格式，并动态指定UHadoop的存储路径。
 
+插件的接口定义如下：
+
+``` java
+
+package cn.ucloud.sinker.thirdpart;
+
+import java.io.IOException;
+
+public interface ThirdpartPlugin {
+
+  /**
+   * @param body 原始消息
+   * @return 转换后的消息
+   */
+  public byte[] transform(byte[] body) throws IOException;
+
+  /**
+   * @param body 原始消息
+   * @return 该消息的 hdfs 目录前缀
+   */
+  public String extractDirName(byte[] body) throws IOException;
+}
+
+```
+
+请确保该接口的实现类有默认的构造函数，以便我们构造该实现类的实例。
+
+在通过Kafka连接器的上游接收到数据时，我们会对每条从UKafka中接收到的消息调用transform方法对消息进行转换，同时对每条接收到的消息调用extractDirName方法确定数据的存储路径前缀。
+如果您不需要自定义存储路径，可以通过返回null来忽略。
+
+在编写完自定义插件逻辑，并打包为jar包后，需要将该jar包上传到您对应地区的ufile存储中。
+
+表单中的插件ufile地址为该插件的ufile下载地址，可以在ufile文件管理界面点击下载按钮获得，入口类为插件接口实现类的引用路径，为full-package-name.ClassName格式。
+
 ### 监控说明
 
 通过监控视图标签页，可以看到我们提供的5个监控项。
