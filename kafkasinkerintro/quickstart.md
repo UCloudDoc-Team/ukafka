@@ -1,6 +1,6 @@
 {{indexmenu_n>10}}
 
-# 快速开始
+## 快速开始
 
 本例以UKafka数据同步到UHadoop来做说明。
 
