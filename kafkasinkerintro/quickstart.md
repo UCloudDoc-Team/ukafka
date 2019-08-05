@@ -20,7 +20,7 @@
 
 本例中上游为UKafka集群，下游为UHadoop集群，目标HDFS路径为/test/kafkaSinker。
 
-![](/images/创建页面.png)
+![](/images/创建页面-v2.jpg)
 
 连接器创建完成后，可在列表中查看属性概览，也可在详情页中做更多管理。
 
