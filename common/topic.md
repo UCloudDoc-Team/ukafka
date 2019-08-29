@@ -20,7 +20,7 @@ Topic即为特定的消息流或类消息队列。UKafka为用户提供直接在
 
 在集群列表中点击“Topic管理”功能，或在集群管理中，点击“Topic管理”标签。
 
-点击“创建Topic”按钮，并分别录入“Topic名称”，分区数量，副本（数量可参考[faq\#创建Topic时,我应该怎么设置分区Partitions数量与副本replication-factor数量](/analysis/%20ukafka/faq#创建Topic时,我应该怎么设置分区Partitions数量与副本replication-factor数量)）进行Topic创建。
+点击“创建Topic”按钮，并分别录入“Topic名称”，分区数量，副本（数量可参考[faq\#创建Topic时,我应该怎么设置分区Partitions数量与副本replication-factor数量](/analysis/ukafka/faq#创建Topic时,我应该怎么设置分区Partitions数量与副本replication-factor数量)）进行Topic创建。
 
 ![](/images/common/create_topic_2.png)
 
