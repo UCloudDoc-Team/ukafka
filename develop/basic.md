@@ -65,8 +65,6 @@ hello ukafka
 ^CConsumed 2 messages
 ```
 
-> 注解：from-beginning参数表示从所存储message的第一行开始消费。
-
 - 删除Topic
 
 ```
@@ -75,4 +73,5 @@ Topic test_ucloud is marked for deletion
 Note: This will have no impact if delete.topic.enable is not set to true.
 ```
 
+> 注解：from-beginning参数表示从所存储message的第一行开始消费。
 > 注解：此命令会标记Topic为删除状态，只有当delete.topic.enable设置为true时才会真正删除数据，默认为true。
