@@ -16,11 +16,15 @@
 
 3. 解压文件夹：
 
-        $ tar -xzvf kafka_2.11-2.1.0.tgz
+```
+$ tar -xzvf kafka_2.11-2.1.0.tgz
+```
 
 4. 进入文件夹：
 
-        $ cd kafka_2.11-2.1.0/bin
+```
+$ cd kafka_2.11-2.1.0/bin
+```
 
 ### 3. 基本操作
 
@@ -28,37 +32,47 @@
 
 - 创建Topic
 
-        $ kafka-topics.sh --zookeeper [broker1 IP]:2181 --create --topic test_ucloud --partitions 3 --replication-factor 3
-        Created topic "test_ucloud".
+```
+$ kafka-topics.sh --zookeeper [broker1 IP]:2181 --create --topic test_ucloud --partitions 3 --replication-factor 3
+Created topic "test_ucloud".
+```
 
 - 查看Topic
 
-        $ kafka-topics.sh --zookeeper [broker1 IP]:2181 --describe --topic test_ucloud
-        Topic:test_ucloud   PartitionCout:3     ReplicationFactor:3    Configs:
-            Topic: test_ucloud  Partition: 0    Leader: 5   Replicas: 5,1,2 Isr: 5,1,2
-            Topic: test_ucloud  Partition: 1    Leader: 1   Replicas: 1,2,3 Isr: 1,2,3
-            Topic: test_ucloud  Partition: 2    Leader: 2   Replicas: 2,3,4 Isr: 2,3,4
+```
+$ kafka-topics.sh --zookeeper [broker1 IP]:2181 --describe --topic test_ucloud
+Topic:test_ucloud   PartitionCout:3     ReplicationFactor:3    Configs:
+    Topic: test_ucloud  Partition: 0    Leader: 5   Replicas: 5,1,2 Isr: 5,1,2
+    Topic: test_ucloud  Partition: 1    Leader: 1   Replicas: 1,2,3 Isr: 1,2,3
+    Topic: test_ucloud  Partition: 2    Leader: 2   Replicas: 2,3,4 Isr: 2,3,4
+```
 
 - 发送消息
 
-        $ kafka-console-producer.sh --broker-list [broker1 IP]:9092 --topic test_ucloud
-        [2016-08-11 13:42:31,788] WARN Property topic is not valid(kafka.utils.VerifiableProperties)
-        hello ukafka
-        hello ukafka
+```
+$ kafka-console-producer.sh --broker-list [broker1 IP]:9092 --topic test_ucloud
+[2016-08-11 13:42:31,788] WARN Property topic is not valid(kafka.utils.VerifiableProperties)
+hello ukafka
+hello ukafka
+```
 
 - 接收消息
 
-        $ kafka-console-consumer.sh --bootstrap-server [broker1 IP]:9092 --topic test_ucloud --from-beginning
-        hello ukafka
-        hello ukafka
-        ^CConsumed 2 messages
+```
+$ kafka-console-consumer.sh --bootstrap-server [broker1 IP]:9092 --topic test_ucloud --from-beginning
+hello ukafka
+hello ukafka
+^CConsumed 2 messages
+```
 
 > 注解：from-beginning参数表示从所存储message的第一行开始消费。
 
 - 删除Topic
 
-        $ kafka-topics.sh --zookeeper [broker1 ip]:2181 --delete --topic test_ucloud
-        Topic test_ucloud is marked for deletion
-        Note: This will have no impact if delete.topic.enable is not set to true.
+```
+$ kafka-topics.sh --zookeeper [broker1 ip]:2181 --delete --topic test_ucloud
+Topic test_ucloud is marked for deletion
+Note: This will have no impact if delete.topic.enable is not set to true.
+```
 
 > 注解：此命令会标记Topic为删除状态，只有当delete.topic.enable设置为true时才会真正删除数据，默认为true。
