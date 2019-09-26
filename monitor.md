@@ -1,4 +1,4 @@
-{{indexmenu_n>3}}
+{{indexmenu_n>5}}
 
 # 监控项说明
 
