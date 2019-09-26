@@ -36,20 +36,16 @@
 
  - 登陆uhadoop的master1节点，查看 HDFS 的文件：
 
-``` sh
-
+<code sh>
 hadoop fs -ls /test/kafkaSinker/2019-07-21/
-
-```
+</code>
 
 ![](/images/hdfs-fs.png)
 
  - 查看文本内容是否与UKafka中输入的相同：
 
-``` sh
-
+<code sh>
 hadoop fs -text /test/kafkaSinker/2019-07-21/for-sinker-test-1.1563728241834.gz.tmp
-
-```
+</code>
 
 ![](/images/hdfs-text.png)

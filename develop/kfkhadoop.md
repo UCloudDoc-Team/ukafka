@@ -60,7 +60,6 @@ agent.channels.memoryChannel.capacity = 10000
 agent.channels.memoryChannel.transactionCapacity = 1500
 ```
 
-> 注解：
 >
 > 1.需要将ip1、ip2、ip3换成自己kafka集群节点ip，YYYYYY修改为具体的uhadoop集群id;
 >

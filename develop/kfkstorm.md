@@ -99,7 +99,7 @@ Storm UI展示界面：
 
 **1.topology.java**
 
-``` java
+<file java topology.java>
 import java.util.HashMap;
 import java.util.Map;
 import backtype.storm.Config;
@@ -120,27 +120,27 @@ public class topology {
 
         //接收消息队列的主题
         String topic="test";
-        
+
         //zookeeper 设置文件中的配置，如果 zookeeper 配置文件中设置为主机 名:端口号 ，该项为空
         String zkRoot="";
 
         //任意
         String spoutId="test_consumer_group";
         SpoutConfig spoutConfig = new SpoutConfig(brokerHosts, topic, zkRoot, spoutId);
-        
+
         //设置如何处理 kafka 消息队列输入流
         spoutConfig.scheme=new SchemeAsMultiScheme(new MessageScheme());
-        
+
         //从 offset 最小值开始读取数据，否则从启动后开始读
         spoutConfig.forceFromStart=true;
-    
+
         Config conf=new Config();
         //不输出调试信息
-        conf.setDebug(false);       
+        conf.setDebug(false);
         //设置一个spout task中处于pending状态的最大的tuples数量
         conf.put(Config.TOPOLOGY_MAX_SPOUT_PENDING, 1);
-          
-        Map<String, String> map=new HashMap<String,String>();       
+
+        Map<String, String> map=new HashMap<String,String>();
         //配置 Kafka broker 地址
         map.put("metadata.broker.list", "master:9092,slave1:9092,slave2:9092");
         // serializer.class为消息的序列化类
@@ -154,10 +154,10 @@ public class topology {
         builder.setSpout("spout", new KafkaSpout(spoutConfig),1);
         builder.setBolt("bolt1", new QueryBolt(),1).setNumTasks(1).shuffleGrouping("spout");
         builder.setBolt("bolt2", new KafkaBolt<String, String>(),1).setNumTasks(1).shuffleGrouping("bolt1");
-   
+
         String name= topology.class.getSimpleName();
         if (args != null && args.length > 0) {
-            // Nimbus host name passed from command line 
+            // Nimbus host name passed from command line
             conf.put(Config.NIMBUS_HOST, args[0]);
             conf.setNumWorkers(3);
             StormSubmitter.submitTopologyWithProgressBar(name, conf, builder.createTopology());
@@ -170,11 +170,11 @@ public class topology {
         }
     }
 }
-```
+</file>
 
 **2.MessageScheme.java**
 
-``` java
+<file java MessageScheme.java>
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import org.slf4j.Logger;
@@ -183,31 +183,31 @@ import backtype.storm.spout.Scheme;
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Values;
 
-public class MessageScheme implements Scheme {  
+public class MessageScheme implements Scheme {
     private static final Logger LOGGER = LoggerFactory.getLogger(MessageScheme.class);
-    
+
     public List<Object> deserialize(byte[] ser) {
         try {
             //从 kafka 中读取的值直接序列化为 UTF-8 的 str
             String mString=new String(ser, "UTF-8");
-            return new Values(mString);     
+            return new Values(mString);
         } catch (UnsupportedEncodingException e) {
             // TODO Auto-generated catch block
             LOGGER.error("Cannot parse the provided message");
-        }       
+        }
         return null;
     }
-    
+
     public Fields getOutputFields() {
         // TODO Auto-generated method stub
-        return new Fields("msg");   
+        return new Fields("msg");
     }
 }
-```
+</file>
 
 **3.QueryBolt.java**
 
-``` java
+<file java QueryBolt.java>
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -225,7 +225,7 @@ import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 
 public class QueryBolt implements IRichBolt {
-    List<String> list;  
+    List<String> list;
     OutputCollector collector;
 
     public void prepare(Map stormConf, TopologyContext context, OutputCollector collector) {
@@ -234,35 +234,35 @@ public class QueryBolt implements IRichBolt {
     }
 
     public void execute(Tuple input) {
-        // TODO Auto-generated method stub 
+        // TODO Auto-generated method stub
         String str=(String) input.getValue(0);
         //将 str 加入到 list
-        list.add(str);      
+        list.add(str);
         //发送 ack
         collector.ack(input);
         //发送该 str
         collector.emit(new Values(str));
     }
-    
-    public void cleanup() {//topology被killed时调用 
-        //将 list 的值写入到文件        
-        try {           
+
+    public void cleanup() {//topology被killed时调用
+        //将 list 的值写入到文件
+        try {
             FileOutputStream outputStream = new FileOutputStream("/data/" + this + ".txt");
             PrintStream p = new PrintStream(outputStream);
-            p.println("begin!");            
-            p.println(list.size());         
+            p.println("begin!");
+            p.println(list.size());
             for(String tmp:list){
                 p.println(tmp);
             }
             p.println("end!");
-            try {               
-                p.close();              
+            try {
+                p.close();
                 outputStream.close();
-            } catch (IOException e) {               
+            } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
-            }       
-        } catch (FileNotFoundException e) {         
+            }
+        } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
@@ -277,7 +277,7 @@ public class QueryBolt implements IRichBolt {
         return null;
     }
 }
-```
+</file>
 
 - 编译
 

@@ -10,7 +10,7 @@ logstash-input-kafka”安装连接UKafka所需插件。
 
 配置logstash-output-kafka.conf文件
 
-``` json
+<file json logstash-output-kafka.conf>
 input {
     generator { count => 30000000 }
 }
@@ -21,7 +21,7 @@ output {
         topic_id => "logstash"
     }
 }
-```
+</file>
 
 执行"./bin/logstash agent -f logstash-output-kafka.conf"往UKafka发送消息
 
@@ -29,7 +29,7 @@ output {
 
 配置logstash-input-kafka.conf文件
 
-``` json
+<file json logstash-input-kafka.conf>
 input {
     kafka {
         zk_connect => "ip1:2181,ip2:2181,ip3:2181"
@@ -42,7 +42,6 @@ input {
 output {
     stdout {}
 }
-
-```
+</file>
 
 执行"./bin/logstash agent -f logstash-input-kafka.conf"读取UKafka消息
