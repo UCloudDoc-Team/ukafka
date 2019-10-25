@@ -1,4 +1,4 @@
-{{indexmenu_n>8}}
+
 
 ## kafka rest proxy 安装
 
