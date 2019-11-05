@@ -6,7 +6,7 @@
 
 - JavaKafkaWordCount.java
 
-<code java>
+``` java
 package org.apache.spark.examples.streaming;
 import java.util.Map;
 import java.util.HashMap;
@@ -80,7 +80,7 @@ public final class JavaKafkaWordCount {
         jssc.awaitTermination();
     }
 }
-</code>
+```
 
 - 下载依赖包
 
@@ -130,7 +130,7 @@ spark-submit --master yarn --jars spark-streaming-kafka-assembly_2.10-1.5.2.jar 
 
 - KafkaWordCountProducer.scala
 
-<code scala>
+``` scala
 package org.apache.spark.examples.streaming
 
 import java.util.HashMap
@@ -193,7 +193,7 @@ object KafkaWordCountProducer {
         }
     }
 }
-</code>
+```
 - 发送消息
 
 ```
@@ -232,7 +232,7 @@ ip:2181表示zookeeper的监听地址；test-consumer-group表示当前消费的
 
 - wordcount.py
 
-<code python>
+``` python
 #/usr/bin/python
 import sys
 
@@ -260,7 +260,7 @@ if __name__ == "__main__":
     lines.saveAsTextFiles(file)
     ssc.start()
     ssc.awaitTermination()
-</code>
+```
 
 - 执行代码
 

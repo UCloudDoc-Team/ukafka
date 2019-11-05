@@ -1,5 +1,3 @@
-
-
 ### Storm消费kafka消息
 
 - 安装Strom依赖库
@@ -99,7 +97,7 @@ Storm UI展示界面：
 
 **1.topology.java**
 
-<file java topology.java>
+``` java
 import java.util.HashMap;
 import java.util.Map;
 import backtype.storm.Config;
@@ -170,11 +168,11 @@ public class topology {
         }
     }
 }
-</file>
+```
 
 **2.MessageScheme.java**
 
-<file java MessageScheme.java>
+``` java
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import org.slf4j.Logger;
@@ -203,11 +201,11 @@ public class MessageScheme implements Scheme {
         return new Fields("msg");
     }
 }
-</file>
+```
 
 **3.QueryBolt.java**
 
-<file java QueryBolt.java>
+``` java
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -277,7 +275,7 @@ public class QueryBolt implements IRichBolt {
         return null;
     }
 }
-</file>
+```
 
 - 编译
 

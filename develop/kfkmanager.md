@@ -1,5 +1,3 @@
-
-
 ### Kafka-Manager设置
 
 通过http://EIP:9000可以看到以下内容

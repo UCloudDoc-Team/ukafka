@@ -1,5 +1,3 @@
-
-
 ## FAQs
 
 ### 创建Topic时,我应该怎么设置分区Partitions数量与副本replication-factor数量？

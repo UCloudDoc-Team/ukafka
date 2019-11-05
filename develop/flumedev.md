@@ -1,5 +1,3 @@
-
-
 ## 使用Flume+UKafka
 
 ### 1. Flume简介

@@ -1,5 +1,3 @@
-
-
 ## 产品功能
 
 ### 名词说明
@@ -69,7 +67,7 @@ UKafka集群的创建请参考文档：https://doc.ucloud.cn/analysis/ukafka/com
 
 插件的接口定义如下：
 
-<file java ThirdpartPlugin.java>
+``` java
 package cn.ucloud.sinker.thirdpart;
 
 import java.io.IOException;
@@ -88,7 +86,7 @@ public interface ThirdpartPlugin {
    */
   public String extractDirName(byte[] body) throws IOException;
 }
-</file>
+```
 
 请确保该接口的实现类有默认的构造函数，以便我们构造该实现类的实例。
 
