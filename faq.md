@@ -73,3 +73,13 @@ Manager服务，可通过IP:9000访问,由于未提供外网IP绑定，需通过
 ### 发现zookeeper最大延时很高，是否有问题？
 
 zookeeper最大延时（zk\_max\_latency）是表示集群创建以来出现过的请求延时最大值，无法代表当前状态。若想了解当前zookeeper请求延时情况，建议关注平均请求延时监控项。
+
+### 获取消费者详情错误
+
+目前控制台消费者信息是根据消费者类型分别通过访问 zookeeper 或者调用 kafka api 得到的，但是 kafka 客户端 sdk 可以灵活的决定对消费者信息的存储方式，所以在使用没有以标准方式存储信息的 sdk 时，消费者信息可能会获取错误。对于这些消费者，我们目前没有去单独适配，已知会出现问题的 sdk 有：
+
+1. [pykafka](https://github.com/Parsely/pykafka)
+    * https://github.com/Parsely/pykafka/issues/888
+    * https://github.com/Parsely/pykafka/issues/567
+
+在遇到获取信息错误时，可以先使用 `kafka-consumer-groups.sh --bootstrap-server $(hostname):9092  --describe --group $group` 命令确认消费者是否有信息缺失或者错误。
