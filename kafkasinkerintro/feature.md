@@ -68,27 +68,23 @@ UKafka集群的创建请参考文档：https://doc.ucloud.cn/analysis/ukafka/com
 插件的接口定义如下：
 
 ``` java
+package cn.ucloud.sinker.thirdpart;
+
+import java.io.IOException;
+
 public interface ThirdpartPlugin {
-  /**
-   * @param e the event <code>Event</code> to be processed.
-   * There're some metadata stored in the event header, organized as key and desc as following:
-   *          key name    |   desc
-   *            key       |  kafka record key,  i.e. record.key()
-   *           topic      |  topic the record belong to, i.e. record.topic()
-   *          partition   |  partition the record belong to, i.e. record.partition()
-   *          timestamp   |  timestamp of the record, i.e. record.timestamp()
-   *       timestampType  |  type of the timestamp above, i.e. record.timestampType()
-   *          offset      |  offset of the record, i.e. record.offset()
-   *record_take_nano_time |  the timestamp when record is polled from kafka
-   * @return 转换后的消息
-   */
-  public byte[] transform(Event e) throws IOException;
 
   /**
-   * @param e <code>org.apache.flume.Event</code>
+   * @param body 原始消息
+   * @return 转换后的消息
+   */
+  public byte[] transform(byte[] body) throws IOException;
+
+  /**
+   * @param body 原始消息
    * @return 该消息的 hdfs 目录前缀
    */
-  public String extractDirName(Event e) throws IOException;
+  public String extractDirName(byte[] body) throws IOException;
 }
 ```
 
