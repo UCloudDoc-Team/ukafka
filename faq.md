@@ -81,5 +81,8 @@ zookeeper最大延时（zk\_max\_latency）是表示集群创建以来出现过�
 1. [pykafka](https://github.com/Parsely/pykafka)
     * https://github.com/Parsely/pykafka/issues/888
     * https://github.com/Parsely/pykafka/issues/567
+2. jstorm：不会按标准的方式存储消费者组信息，是由自己管理消费实例与 topic partition 的对应关系以及对应的 offset，部分信息存储在 zookeeper 的 `/jstorm` 路径下
+3. flink 0.9 版本的 kafka 消费信息由自己管理，不会在 kafka 这边注册生成 group 信息
 
 在遇到获取信息错误时，可以先使用 `kafka-consumer-groups.sh --bootstrap-server $(hostname):9092  --describe --group $group` 命令确认消费者是否有信息缺失或者错误。
+
