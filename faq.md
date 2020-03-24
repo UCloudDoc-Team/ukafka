@@ -33,13 +33,13 @@ replication\_factor：所要增加到topic副本数
 
 \_\_consumer\_offset是Kafka用来存放客户端消费的offset信息的Topic，默认采用压缩策略。由于客户端应用消费方式不当，导致产生大量commit信息，且集群默认log.cleaner.enable为false，导致采用压缩策略的topic日志未能正常清除。
 
-1. 修改log.cleaner.enable参数为ture（修改方法请参考[common\#调整集群参数](/analysis/ukafka/common#调整集群参数)），建议选择稍后重启，然后按顺序重启每个节点kafka服务（可参考[common\#重启服务](/analysis/ukafka/common#重启服务)）。
+1. 修改log.cleaner.enable参数为ture（修改方法请参考[common\#调整集群参数](ukafka/common#调整集群参数)），建议选择稍后重启，然后按顺序重启每个节点kafka服务（可参考[common\#重启服务](ukafka/common#重启服务)）。
 
 2. 优化客户端代码，减少commit信息的产生
 
 ### 收到离线分区总数\>=10.0个告警，离线分区总数是什么，怎么处理，怎样避免影响服务？
 
-分区是Kafka中Topic的一个物理概念上的消息分块，以实现服务的分布式与高可用。（Kafka介绍可参考[intro](/analysis/ukafka/intro)）
+分区是Kafka中Topic的一个物理概念上的消息分块，以实现服务的分布式与高可用。（Kafka介绍可参考[intro](ukafka/intro)）
 
 收到离线分区总数异常告警一般是某个节点宕机或者服务异常导致。可通过UKafka
 console“节点管理”页面，依次查看每个节点“关联的Topic”信息，若为空，说明此节点异常，进而
