@@ -11,13 +11,6 @@
 * [监控项说明](/ukafka/monitor)
 * 开发指南
     * [快速开始](/ukafka/develop/basic)
-    * [Logstash连接UKafka](/ukafka/develop/logstashdev)
-    * [Kafka-Manager设置](/ukafka/develop/kfkmanager)
-    * [使用Flume+UKafka](/ukafka/develop/flumedev)
-    * [同步UKafka数据到UHadoop](/ukafka/develop/kfkhadoop)
-    * [使用Spark消费UKafka消息](/ukafka/develop/kfkspark)
-    * [Storm消费kafka消息](/ukafka/develop/kfkstorm)
-    * [kafka-rest-proxy安装](/ukafka/develop/kfkrest)
     * [客户端SDK](/ukafka/develop/clientsdk)
 * [FAQs](/ukafka/faq)
 * Kafka连接器
