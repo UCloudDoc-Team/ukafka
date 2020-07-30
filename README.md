@@ -11,6 +11,7 @@
 * [监控项说明](/ukafka/monitor)
 * 开发指南
     * [快速开始](/ukafka/develop/basic)
+    * [认证配置与外网访问](/ukafka/develop/authentication_and_proxy)
     * [客户端SDK](/ukafka/develop/clientsdk)
 * [FAQs](/ukafka/faq)
 * Kafka连接器
