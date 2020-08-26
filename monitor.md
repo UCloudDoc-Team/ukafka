@@ -23,7 +23,7 @@ UKafka 控制台的 \<监控视图\> 提供了集群和节点的多维度监控�
 |:::|分布在该节点上的分区总数（个）|该节点上分区总数|
 |:::|分布在该节点上的leader分区总数（个）|该节点上leader分区总数|
 |:::|未复制的分区总数（个）|待做复制的分区的数量，正常值为0|
-|:::|ISR收缩速率（个/s）|ISR的收缩(shrink)速率。<\br> 如果一个broker挂掉了，一些partition的ISR会收缩。<\br> 当那个broker重新起来时，一旦它的replica完全跟上，ISR会扩大(expand)。<\br> 除此之外，正常情况下，此值和下面的扩大速率都是0。|
+|:::|ISR收缩速率（个/s）|ISR的收缩(shrink)速率。<\br> 如果一个broker挂掉了，一些partition的ISR会收缩。<\br> 当那个broker重新起来时，一旦它的replica完全跟上，ISR会扩大(expand)。<\br> 除此之外，正常情况下，此值和下面的扩大速率都是0 |
 |:::|ISR扩大速率（个/s）|ISR的扩大(expansion)速率，参见ISR的收缩(shrink)速率|
 |:::|管理节点个数（个）|当前的broker是否为controller。<\br> 在集群中只有一个broker的这个值为1，其他值为0，如果都为0，集群有问题。|
 |:::|离线分区总数（个）|离线的partition个数|
