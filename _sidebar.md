@@ -14,7 +14,7 @@
     * [快速开始](/ukafka/develop/basic)
     * [认证配置与外网访问](/ukafka/develop/authentication_and_proxy)
     * [客户端SDK](/ukafka/develop/clientsdk)
-* [性能测试](/ukafka/benchmark)
+* [性能测试](/ukafka/benchmark/index)
 * [FAQs](/ukafka/faq)
 * Kafka连接器
     * [产品介绍](/ukafka/kafkasinkerintro/intro)
