@@ -1,4 +1,3 @@
-<div class="sidebar_title icon__ukafka"> Kafka消息队列 UKafka</div>
 
 * [概览](/ukafka/README)
 * [产品简介](/ukafka/intro)
