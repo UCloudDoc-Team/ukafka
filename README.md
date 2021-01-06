@@ -1,6 +1,6 @@
 # 概览
 
-* [产品简介.](/ukafka/intro)
+* [产品简介](/ukafka/intro)
 * 操作指南
     * [集群管理](/ukafka/common/cluster)
     * [节点管理](/ukafka/common/node)
