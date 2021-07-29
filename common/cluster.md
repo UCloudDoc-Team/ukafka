@@ -12,25 +12,25 @@
 
 集群可配置参数见下表（集群已有默认配置，以下配置请您在确认实际需求后再更改）：
 
-| 参数名称                            | 参数类型   | 参数范围           | 释义             |
-| ------------------------------- | ------ | -------------- | -------------- |
-| auto.create.topics.enable       | bool   | true/false     | 是否允许自动创建Topic  |
-| auto.leader.rebalance.enable    | bool   | true/false     | 是否开启节点间数据均衡    |
-| default.replication.factor      | int    | 1-10           | 默认复制因子数量       |
-| delete.topic.enable             | bool   | true/false     | 是否允许删除topic信息  |
-| log.cleaner.delete.retention.ms | int    | 1-2147483646   | 压缩日志最长保留时间     |
-| log.cleaner.enable              | bool   | true/false     | 是否开启压缩日志清理     |
-| log.cleanup.policy              | string | delete/compact | 日志清理策略，删除/压缩   |
-| log.retention.hours             | int    | 1-10000        | 日志最小保留时间       |
-| log.segment.bytes               | int    | 1-2147483646   | 单个日志文件最大容量     |
-| message.max.bytes               | int    | 1-2147483646   | 单个日志文件最大容量     |
-| num.io.threads                  | int    | 1-32           | 处理磁盘IO的线程数     |
-| num.network.threads             | int    | 1-32           | 处理网络请求的线程数     |
-| num.partitions                  | int    | 1-1000         | 分区数量           |
-| replica.fetch.max.bytes         | int    | 1-2147483646   | 副本同步时消息的最大尺寸   |
-| zookeeper.session.timeout.ms    | int    | 1-2147483646   | zk session超时时间 |
-| zookeeper.connection.timeout.ms | int    | 1-2147483646   | 客户端连接zk超时时间    |
-| zookeeper.sync.time.ms          | int    | 1-2147483646   | zk信息同步间隔       |
+| 参数名称                        | 参数类型 | 参数范围       | 释义                     |
+| ------------------------------- | -------- | -------------- | ------------------------ |
+| auto.create.topics.enable       | bool     | true/false     | 是否允许自动创建Topic    |
+| auto.leader.rebalance.enable    | bool     | true/false     | 是否开启节点间数据均衡   |
+| default.replication.factor      | int      | 1-10           | 默认复制因子数量         |
+| delete.topic.enable             | bool     | true/false     | 是否允许删除topic信息    |
+| log.cleaner.delete.retention.ms | int      | 1-2147483646   | 压缩日志最长保留时间     |
+| log.cleaner.enable              | bool     | true/false     | 是否开启压缩日志清理     |
+| log.cleanup.policy              | string   | delete/compact | 日志清理策略，删除/压缩  |
+| log.retention.hours             | int      | 1-10000        | 日志最小保留时间         |
+| log.segment.bytes               | int      | 1-2147483646   | 每个segment文件的大小    |
+| message.max.bytes               | int      | 1-2147483646   | 消息体的最大大小         |
+| num.io.threads                  | int      | 1-32           | 处理磁盘IO的线程数       |
+| num.network.threads             | int      | 1-32           | 处理网络请求的线程数     |
+| num.partitions                  | int      | 1-1000         | 分区数量                 |
+| replica.fetch.max.bytes         | int      | 1-2147483646   | 副本同步时消息的最大尺寸 |
+| zookeeper.session.timeout.ms    | int      | 1-2147483646   | zk session超时时间       |
+| zookeeper.connection.timeout.ms | int      | 1-2147483646   | 客户端连接zk超时时间     |
+| zookeeper.sync.time.ms          | int      | 1-2147483646   | zk信息同步间隔           |
 
 >
 > replica.fetch.max.bytes须大于等于message.max.bytes；
