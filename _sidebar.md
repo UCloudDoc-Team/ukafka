@@ -22,3 +22,4 @@
     * [性能测试](/ukafka/kafkasinkerintro/perftest)
     * [产品价格](/ukafka/kafkasinkerintro/price)
 * [产品价格](/ukafka/price)
+* [lbtest](/ukafka/lbtest)
