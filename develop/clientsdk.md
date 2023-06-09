@@ -1,5 +1,3 @@
-## 客户端SDK
+# 客户端SDK
 
-UKafka 兼容 Kafka 的客户端SDK，由 Apache Kafka 社区维护的 wiki 提供多种语言的SDK，请参考这里：
-
-<https://cwiki.apache.org/confluence/display/KAFKA/Clients>
+UKafka兼容开源Apache Kafka协议，Apache Kafka社区整理并提供多种语言的开源客户端SDK，参考：<https://cwiki.apache.org/confluence/display/KAFKA/Clients>
