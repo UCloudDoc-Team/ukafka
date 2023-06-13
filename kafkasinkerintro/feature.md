@@ -1,6 +1,6 @@
-## 产品功能
+# 产品功能
 
-### 名词说明
+## 名词说明
 
 | 名词         | 说明                                           |
 |--------------|------------------------------------------------|
@@ -16,7 +16,7 @@
 | 处理单元     | 作为数据流的单位传输机，目前固定为1核2G        |
 | 连接器       | kafka连接器的简称                              |
 
-### 上下游支持
+## 上下游支持
 
 目前上下游必须是UCloud的大数据产品，详情如下：
 
@@ -24,7 +24,7 @@
 | ---------- | ---------- |
 | UKafka      | UHadoop、UES |
 
-### 配置连接器
+## 配置连接器
 
 控制台页面点击【创建连接器】即可开始配置一个新的Kafka连接器。
 
@@ -34,17 +34,17 @@
 
 需要注意的是，处理单元的上限是上游kafka topic的分区数量，当处理单元数量大于该数值时，额外的处理单元会处于空跑状态。
 
-#### 添加上游
+### 添加上游
 
 配置上游时，您可以通过下拉菜单选择已有的UKafka集群，选定UKafka集群后，通过Topic下拉菜单选择需要导出的具体数据源。
 
 目前连接器支持Kafka自带的ByteArrayDeserializer（org.apache.kafka.common.serialization.ByteArrayDeserializer）格式，后续会支持其它Kafka自带格式以及自定义格式。
 
-UKafka集群的创建请参考文档：https://doc.ucloud.cn/analysis/ukafka/common/cluster
+UKafka集群的创建请参考文档：[UKafka集群创建](/ukafka/guide/cluster/create)
 
-#### 添加下游
+### 添加下游
 
- 1. 添加HDFS下游
+#### 1. 添加HDFS下游
 
 首先选择下游类型为HDFS，并在下游标识符中选择您的UHadoop集群。
 
@@ -55,11 +55,11 @@ UKafka集群的创建请参考文档：https://doc.ucloud.cn/analysis/ukafka/com
 
 当前文件的压缩方式统一为gzip，后续将支持更多压缩方式。
 
- 2. 添加Elasticsearch下游
+#### 2. 添加Elasticsearch下游
 
 如果选择下游类型为Elasticsearch，则需要在下游标识符中选择您的UES集群，并填写目标索引的名称和类型。
 
-### 插件管理（灰度） 
+## 插件管理（灰度）
 
 自定义插件功能目前已灰度发布，如有需求请联系技术支持开通。
 
@@ -97,7 +97,7 @@ public interface ThirdpartPlugin {
 
 表单中的插件ufile地址为该插件的ufile下载地址，可以在ufile文件管理界面点击下载按钮获得，入口类为插件接口实现类的引用路径，为full-package-name.ClassName格式。
 
-### 监控说明
+## 监控说明
 
 通过监控视图标签页，可以看到我们提供的5个监控项。
 
