@@ -1,6 +1,6 @@
 # 集群创建
 
-首先登录并前往[控制台 UKafka 页面](https://console.ucloud.cn/ukafka/)，点击【创建集群】，进入UKafka集群配置信息页面。
+首先登录并前往[控制台 UKafka 页面](https://console.ucloud.cn/ukafka/ukafka)，点击【创建集群】，进入UKafka集群配置信息页面。
 
 ![img](/images/guide/cluster/create_button.png)
 
@@ -16,7 +16,7 @@
 
 > 1. 版本号与开源版本号对应，如无特殊要求，建议您选择最新版本。
 > 2. 消息最长保存时间为 Kafka server 配置 `log.retention.hours`，集群创建后您可在 [参数配置](/ukafka/guide/cluster/config) 修改。
-> 3. 磁盘管理方式参考：[磁盘管理](/ukafka/guide/cluster/diskmanager)。
+> 3. 磁盘管理方式参考：[磁盘限制配置](/ukafka/guide/cluster/diskmanager)。
 
 ## 选择机型
 
@@ -24,8 +24,8 @@
 
 ![img](/images/guide/cluster/create_type.png)
 
-> 1. 选择节点机型，不同机型 CPU、内存不一致，您可根据业务需求量按需选择。机型列表参考：[机型列表](/ukafka/price/price)
-> 2. 磁盘大小为单节点数据磁盘量，以三副本为例，如您购买 300G 磁盘，实际存储业务的磁盘大小为 100G，其余 200G 为备份容量。
+> 1. 选择节点机型，不同机型 CPU、内存不一致，您可根据业务需求量按需选择。机型列表参考：[机型列表](/ukafka/price/charge)
+> 2. 磁盘大小为单节点数据磁盘量。
 > 3. 集群最小规模至少3个节点，后续您可根据业务增长情况在控制台扩容节点，参考：[节点扩容](/ukafka/guide/node/expand)。
 
 ## 配置网络

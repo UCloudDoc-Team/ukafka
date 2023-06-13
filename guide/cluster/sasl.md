@@ -23,4 +23,4 @@ UKafka集群认证配置使用Kafka SASL协议实现，认证配置修改后必�
 
 开启认证配置后，如您可以使用SASL协议接入集群，SASL协议接入点参考：[SASL_PLAINTEXT协议地址](/ukafka/guide/node/address#SASL_PLAINTEXT协议地址)
 
-> 配置需要等待重启完成生效，SASL_PLAINTEXT协议的接入点可能会有延迟
+> 配置需要等待重启完成才能生效，SASL_PLAINTEXT协议的接入点展示可能会有延迟。

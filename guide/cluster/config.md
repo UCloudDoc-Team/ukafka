@@ -39,8 +39,8 @@
 | zookeeper.sync.time.ms          | int      | 1-2147483646   | zk信息同步间隔           |
 -->
 
-> 注意事项
-> auto.create.topics.enable 生产业务建议关闭，以免影响线上环境稳定运行。
+> 注意事项：  
+> auto.create.topics.enable 生产业务建议关闭，以免影响线上环境稳定运行。  
 > default.replication.factor 至少为2，否则无法保证服务高可用性。  
 > replica.fetch.max.bytes 须大于等于 message.max.bytes。  
 > num.io.threads 与 num.network.threads 可控制节点负载与集群性能均衡。
