@@ -12,10 +12,12 @@
 
 ### 1. 创建与UKafka集群处于同一子网下的云主机
 
+注意：本文档基于 CentOS 7.9
+
 ### 2. 在云主机上安装 nginx
 
 ```shell
-yum install nginx
+yum install nginx nginx-all-modules.noarch
 ```
 
 ### 3. 配置 nginx 代理
@@ -76,13 +78,21 @@ server {
 }
 ```
 
-- 应用配置
+- 启动 nginx
 
 ```shell
-nginx -s reload
+systemctl start nginx.service
 ```
 
-> 主机防火墙需要接收转发请求的 9093, 9094, 9095 端口
+- 验证 nginx 服务状态
+
+```shell
+systemctl status nginx.service
+```
+
+### 4. 主机防火墙配置
+
+主机防火墙需要接收转发请求的 9093, 9094, 9095 端口。
 
 ## 外网访问
 
@@ -98,19 +108,38 @@ nginx -s reload
 
 ### 2. Kafka 命令行工具访问
 
-配置 `kafka_client_jaas.conf` 文件如下，`username` 和 `password` 填控制台配置的用户名和密码：
+#### 下载并配置 Kafka 命令行工具
 
-```conf
+以 Kafka 2.6.1 命令行工具为例：
+
+> 可按实例版本下载命令行工具
+
+```shell
+# 下载命令行工具
+wget https://archive.apache.org/dist/kafka/2.6.1/kafka_2.13-2.6.1.tgz
+
+# 解压
+tar -zxvf kafka_2.13-2.6.1.tgz
+
+# 进入命令行工具根目录
+cd kafka_2.13-2.6.1
+```
+
+配置 `config/kafka_client_jaas.conf` 文件如下，`username` 和 `password` 填写控制台开启集群认证配置的用户名和密码：
+
+```shell
+cat > config/kafka_client_jaas.conf << EOF
 KafkaClient {
   org.apache.kafka.common.security.plain.PlainLoginModule required
   username="admin"
   password="admin_pass";
 };
+EOF
 ```
 
 #### 发送消息
 
-- 修改 `kafka-console-producer.sh` 增加 `java.security.auth.login.config` 参数
+- 修改 `bin/kafka-console-producer.sh` 增加 `java.security.auth.login.config` 参数
 
 ```sh
 if [ "x$KAFKA_HEAP_OPTS" = "x" ]; then
@@ -119,14 +148,14 @@ fi
 exec $(dirname $0)/kafka-run-class.sh -Djava.security.auth.login.config=./config/kafka_client_jaas.conf kafka.tools.ConsoleProducer "$@"
 ```
 
-- 修改 `producer.properties`，指定 `security.protocol`, `sasl.mechanism`
+- 修改 `config/producer.properties`，指定 `security.protocol`, `sasl.mechanism`
 
 ```sh
 security.protocol=SASL_PLAINTEXT
 sasl.mechanism=PLAIN
 ```
 
-- 运行 `kafka-console-producer.sh` 发送消息：
+- 运行 `bin/kafka-console-producer.sh` 发送消息：
 
 ```shell
 bin/kafka-console-producer.sh  --producer.config ./config/producer.properties --topic foo --broker-list ukafka-q0j01x5g-kafka1:9093,ukafka-q0j01x5g-kafka2:9094,ukafka-q0j01x5g-kafka3:9095
@@ -139,16 +168,16 @@ bin/kafka-console-producer.sh  --producer.config ./config/producer.properties --
 
 #### 接收消息
 
-- 修改 `kafka-console-consumer.sh` 增加 `java.security.auth.login.config` 参数
+- 修改 `bin/kafka-console-consumer.sh` 增加 `java.security.auth.login.config` 参数
 
 ``` sh
 if [ "x$KAFKA_HEAP_OPTS" = "x" ]; then
     export KAFKA_HEAP_OPTS="-Xmx512M"
 fi
-exec $(dirname $0)/kafka-run-class.sh -Djava.security.auth.login.config=./config/kafka_client_jaas.conf kafka.tools.ConsoleProducer "$@"
+exec $(dirname $0)/kafka-run-class.sh -Djava.security.auth.login.config=./config/kafka_client_jaas.conf kafka.tools.ConsoleConsumer "$@"
 ```
 
-- 修改 `consumer.properties`，指定 `security.protocol`, `sasl.mechanism`
+- 修改 `config/consumer.properties`，指定 `security.protocol`, `sasl.mechanism`
 
 ``` sh
 group.id=test-consumer-group
@@ -157,7 +186,7 @@ security.protocol=SASL_PLAINTEXT
 sasl.mechanism=PLAIN
 ```
 
-- 运行 `kafka-console-producer.sh` 接收消息
+- 运行 `bin/kafka-console-consumer.sh` 接收消息
 
 ```shell
 bin/kafka-console-consumer.sh --consumer.config ./config/consumer.properties --topic foo --bootstrap-server ukafka-q0j01x5g-kafka1:9093,ukafka-q0j01x5g-kafka2:9094,ukafka-q0j01x5g-kafka3:9095 --from-beginning
@@ -169,7 +198,9 @@ bar
 
 ### 3. Java SDK 访问
 
-- 配置 `kafka_client_jaas.conf` 文件如下，`username` 和 `password` 填控制台配置的用户名和密码
+Java SDK 访问有多种方式，如配置 `kafka_client_jaas.conf` 文件，或直接设置属性 `sasl.jaas.config`，详情可参考下述代码示例中的三种方式。
+
+如使用 `kafka_client_jaas.conf` 配置文件，`username` 和 `password` 填写控制台开启集群认证配置的用户名和密码：
 
 ```shell
 KafkaClient {
@@ -194,9 +225,10 @@ import java.util.concurrent.Future;
 public class KafkaProducerExample {
 
     public static void main(String[] args) throws Exception {
-        // 添加环境变量，需要指定配置文件的路径
-        // 或者添加启动 JVM 参数 `-Djava.security.auth.login.config=./config/kafka_client_jaas.conf`
+        // 方式1：添加环境变量，需要指定配置文件的路径
         System.setProperty("java.security.auth.login.config", "./config/kafka_client_jaas.conf");
+
+        // 方式2：添加启动 JVM 参数 `-Djava.security.auth.login.config=./config/kafka_client_jaas.conf`
 
         Properties props = new Properties();
         props.put("bootstrap.servers", "ukafka-q0j01x5g-kafka1:9093,ukafka-q0j01x5g-kafka2:9094,ukafka-q0j01x5g-kafka3:9095");
@@ -204,6 +236,9 @@ public class KafkaProducerExample {
         // 需要指定 security.protocol 与 sasl.mechanism
         props.put("security.protocol", "SASL_PLAINTEXT");
         props.put("sasl.mechanism", "PLAIN");
+
+        // 方式3：Properties 设置 jaas 配置内容
+        // props.put("sasl.jaas.config", "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"admin\" password=\"admin_pass\";");
 
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
@@ -242,9 +277,10 @@ import java.util.Properties;
 public class KafkaConsumerExample {
 
     public static void main(String[] args) throws Exception {
-        // 添加环境变量，需要指定配置文件的路径
-        // 或者添加启动 JVM 参数 `-Djava.security.auth.login.config=./config/kafka_client_jaas.conf`
+        // 方式1：添加环境变量，需要指定配置文件的路径
         System.setProperty("java.security.auth.login.config", "./config/kafka_client_jaas.conf");
+
+        // 方式2：添加启动 JVM 参数 `-Djava.security.auth.login.config=./config/kafka_client_jaas.conf`
 
         Properties props = new Properties();
         props.put("bootstrap.servers", "ukafka-q0j01x5g-kafka1:9093,ukafka-q0j01x5g-kafka2:9094,ukafka-q0j01x5g-kafka3:9095");
@@ -254,6 +290,9 @@ public class KafkaConsumerExample {
         // 需要指定 security.protocol 与 sasl.mechanism
         props.put("security.protocol", "SASL_PLAINTEXT");
         props.put("sasl.mechanism", "PLAIN");
+
+        // 方式3：Properties 设置 jaas 配置内容
+        // props.put("sasl.jaas.config", "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"admin\" password=\"admin_pass\";");
 
         props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
