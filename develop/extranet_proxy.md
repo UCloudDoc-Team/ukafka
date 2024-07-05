@@ -12,10 +12,12 @@
 
 ### 1. 创建与UKafka集群处于同一子网下的云主机
 
+注意：本文档基于 CentOS 7.9
+
 ### 2. 在云主机上安装 nginx
 
 ```shell
-yum install nginx
+yum install nginx nginx-all-modules.noarch
 ```
 
 ### 3. 配置 nginx 代理
@@ -76,10 +78,16 @@ server {
 }
 ```
 
-- 应用配置
+- 启动 nginx
 
 ```shell
-nginx -s reload
+systemctl start nginx.service
+```
+
+- 验证 nginx 服务状态
+
+```shell
+systemctl status nginx.service
 ```
 
 ### 4. 主机防火墙配置
